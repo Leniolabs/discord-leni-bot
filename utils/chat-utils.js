@@ -4,16 +4,11 @@ function isAskingLeni(message) {
 	);
 }
 
-// eslint-disable-next-line no-unused-vars
-function isAskingInForbiddenChannel(message) {
+function 	isAskingInAnAllowedChannel(message) {
 	return (
-		process.env.FORBIDDEN_CHANNEL_IDS.includes(message?.channelId) ||
-    process.env.FORBIDDEN_CHANNEL_IDS.includes(message?.channel?.parentId)
+		process.env.ALLOWED_CHANNEL_IDS.includes(message?.channelId) ||
+    process.env.ALLOWED_CHANNEL_IDS.includes(message?.channel?.parentId)
 	);
-	// if (!process.env.CLASSROOM_IDS) {
-	// 	return false;
-	// }
-	// return process.env.CLASSROOM_IDS.some(id => id === message.channelID);
 }
 
 function getQuestion(message) {
@@ -22,6 +17,6 @@ function getQuestion(message) {
 
 module.exports = {
 	isAskingLeni,
-	isAskingInForbiddenChannel,
+	isAskingInAnAllowedChannel,
 	getQuestion,
 };

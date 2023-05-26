@@ -4,7 +4,7 @@ const { getChatCompletion } = require('../openAi');
 const db = require('../DB');
 const {
 	getQuestion,
-	isAskingInForbiddenChannel,
+	isAskingInAnAllowedChannel,
 	isAskingLeni,
 } = require('../utils/chat-utils.js');
 
@@ -17,7 +17,7 @@ module.exports = {
 		if (!isAskingLeni(startMessage)) {
 			return false;
 		}
-		if (isAskingInForbiddenChannel(message)) {
+		if (!isAskingInAnAllowedChannel(message)) {
 			return message.channel?.send(
 				'Please direct your questions to the classroom channel exclusively. Thank you. 👽',
 			);
