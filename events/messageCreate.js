@@ -6,6 +6,7 @@ const {
   getQuestion,
   isAskingInForbiddenChannel,
   isAskingLeni,
+  warningMessageLang,
 } = require("../utils/chat-utils.js");
 
 module.exports = {
@@ -89,7 +90,7 @@ module.exports = {
         return db.close();
       }
       message.channel.send(
-        `🤖I’m an Artificial Intelligence powered chatbot here to help, but please note that I may provide inaccurate answers at times. So, double-check any information I give you to be safe! 😅🔍\n\n${response}`,
+        `${warningMessageLang(response.lang)}\n\n${response.chatgptResponse}`,
       );
       await db.modify(message.author.tag, (user?.qty || 0) + 1);
       return db.close();

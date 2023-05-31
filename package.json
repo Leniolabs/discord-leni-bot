@@ -16,6 +16,7 @@
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
     "gpt-3-encoder": "^1.1.4",
+    "langdetect": "^0.2.1",
     "nodemon": "^2.0.22",
     "openai": "^3.2.1",
     "pouchdb": "^8.0.1",
