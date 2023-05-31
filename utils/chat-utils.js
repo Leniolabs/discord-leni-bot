@@ -5,15 +5,11 @@ function isAskingLeni(message) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function isAskingInForbiddenChannel(message) {
+function isAskingInAllowedChannel(message) {
   return (
-    process.env.FORBIDDEN_CHANNEL_IDS.includes(message?.channelId) ||
-    process.env.FORBIDDEN_CHANNEL_IDS.includes(message?.channel?.parentId)
+    process.env.CLASSROOM_IDS.includes(message?.channelId) ||
+    process.env.CLASSROOM_IDS.includes(message?.channel?.parentId)
   );
-  // if (!process.env.CLASSROOM_IDS) {
-  // 	return false;
-  // }
-  // return process.env.CLASSROOM_IDS.some(id => id === message.channelID);
 }
 
 function getQuestion(message) {
@@ -21,7 +17,6 @@ function getQuestion(message) {
 }
 
 function warningMessageLang(lang) {
-  console.log(lang);
   const dictionary = {
     en: "🤖I’m an Artificial Intelligence powered chatbot here to help, but please note that I may provide inaccurate answers at times. So, double-check any information I give you to be safe! 😅🔍",
     es: "🤖Soy un chatbot de inteligencia artificial para ayudar, pero ten en cuenta que a veces puedo proporcionar respuestas inexactas. ¡Así que verifique dos veces cualquier información que te dé para estar seguro! 😅🔍",
@@ -34,7 +29,7 @@ function warningMessageLang(lang) {
 
 module.exports = {
   isAskingLeni,
-  isAskingInForbiddenChannel,
+  isAskingInAllowedChannel,
   getQuestion,
   warningMessageLang,
 };
