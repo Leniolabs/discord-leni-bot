@@ -47,7 +47,7 @@ module.exports = {
 		const { user: interactionUser } = interaction;
 		const userName = `${interactionUser?.username}#${interactionUser?.discriminator}`;
 		const user = await db.get(userName);
-		const questionLeft = 10 - (user?.qty || 0);
+		const questionLeft = Number(process.env.MESSAGES_LIMITS) - (user?.qty || 0);
 
 		const haveQuestionsMessage = `You have ${questionLeft} ${
 			(user?.qty || 0) === 1 ? 'questions' : 'questions'

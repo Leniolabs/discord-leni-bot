@@ -75,7 +75,7 @@ module.exports = {
       if (!user) {
         await db.create(message.author.tag, 0);
       }
-      if (user?.qty >= 10) {
+      if (user?.qty >= Number(process.env.MESSAGES_LIMITS)) {
         loadingMessage.delete();
         message.channel.send(
           `👽 Hi ${message.author.tag} you don't have questions left. Try again tomorrow.`,
