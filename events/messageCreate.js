@@ -14,7 +14,9 @@ module.exports = {
   async execute(message) {
     const startMessage = message.content.slice(0, 23).trim();
     const question = getQuestion(message);
-
+    
+    console.log(startMessage);
+    
     if (!isAskingLeni(startMessage)) {
       return false;
     }
@@ -46,7 +48,7 @@ module.exports = {
 
             return {
               role,
-              content: content
+              content: (content || "")
                 .replace(`<@${process.env.botId}>`, "")
                 .replace(`<@&${process.env.mentionLeni}>`, ""),
             };
