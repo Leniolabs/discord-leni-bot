@@ -78,28 +78,25 @@ module.exports = {
         await db.create(message.author.tag, 0);
       }
       if (user?.qty >= Number(process.env.MESSAGES_LIMITS)) {
-        loadingMessage.delete();
-        message.channel.send(
+        loadingMessage.edit(
           `👽 Hi ${message.author.tag} you don't have questions left. Try again tomorrow.`,
         );
         return db.close();
       }
 
       const response = await getChatCompletion(messageToSend);
-      loadingMessage.delete();
       if (!response) {
-        message.channel.send("😵‍💫 I can't response your question now.");
+        loadingMessage.edit("😵‍💫 I can't response your question now.");
         return db.close();
       }
-      message.channel.send(
+      loadingMessage.edit(
         `${warningMessageLang(response.lang)}\n\n${response.chatgptResponse}`,
       );
       await db.modify(message.author.tag, (user?.qty || 0) + 1);
       return db.close();
     } catch (error) {
       console.log("  error: ", error);
-      loadingMessage.delete();
-      message.channel.send("😵‍💫 I can't response your question now.");
+      loadingMessage.edit("😵‍💫 I can't response your question now.");
       return db.close();
     }
   },
